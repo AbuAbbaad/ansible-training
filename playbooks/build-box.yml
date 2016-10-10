@@ -1,0 +1,23 @@
+---
+- hosts: windows
+  vars:
+    java:
+      JAVA_HOME: "C:\\Program Files\\Java\\jdk1.7.0._76"
+  tasks:
+    - name: install and set java
+      win_chocolatey:
+        name: jdk7 -y
+        version: 7.0.76
+        environment: java
+        state: present
+    - name: set environment
+      win_environment:
+        state: present
+        name: JAVA_HOME
+        value: "C:\\Program Files\\Java\\jdk1.7.0._76"
+        level: machine
+    - name: Install Apache Tomcat
+      win_chocolatey:
+        name: tomcat
+        version: 8.0.33
+        install_args: "C:\\Program Files\\Tomcat-8.0.33"
