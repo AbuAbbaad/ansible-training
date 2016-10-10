@@ -1,37 +1,37 @@
 ---
 - hosts: windows
   vars:
-    java:
-      JAVA_HOME: "C:\\Program Files\\Java\\jdk1.7.0._76"
+      JAVA_HOME: "C:\\Program Files\\Java\\jdk1.7.0_76"
   tasks:
     - name: install and set java
       win_chocolatey:
-        name: jdk7 -y
-        version: 7.0.76
+        name: jdk7
+        version: 1.7.0_76
         environment: java
         state: present
     - name: set environment
       win_environment:
         state: present
         name: JAVA_HOME
-        value: "C:\\Program Files\\Java\\jdk1.7.0._76"
-        level: machine
+        value: "{{ JAVA_HOME }}"
+        level: user 
     - name: Install Apache Tomcat
       win_chocolatey:
         name: tomcat
         version: 8.0.33
+        state: present
     - name: Install Eclipse Luna Java EE IDE
       win_get_url: 
         url: http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR2/eclipse-jee-luna-SR2-win32-x86_64.zip&r=1
         dest: "C:\\Users\\Amina\\eclipse-jee-luna-SR2-win32-x86_64.zip"
-    - name: Grab PSCX msi
-      win_get_url:
-        url: "http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=pscx&DownloadId=923562&FileTime=130585918034470000&Build=20959"
-        dest: "C:\\pscx.msi"
-    - name: Install PSCX msi
-      win_msi:
-        path: "C:\\pscx.msi"
+        force: no
     - name: unzip eclipse
       win_unzip:  
         src: "C:\\Users\\Amina\\eclipse-jee-luna-SR2-win32-x86_64.zip"
         dest: "C:\\Users\\Amina\\tools"
+        creates: "C:\\Users\\Amina\\tools\\eclipse"
+    - name: Notepad Plus
+      win_chocolatey:
+       name: notepadplusplus.install
+       version: 6.9.2
+       state: present
