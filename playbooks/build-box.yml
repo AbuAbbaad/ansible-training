@@ -20,4 +20,18 @@
       win_chocolatey:
         name: tomcat
         version: 8.0.33
-        install_args: "C:\\Program Files\\Tomcat-8.0.33"
+    - name: Install Eclipse Luna Java EE IDE
+      win_get_url: 
+        url: http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR2/eclipse-jee-luna-SR2-win32-x86_64.zip&r=1
+        dest: "C:\\Users\\Amina\\eclipse-jee-luna-SR2-win32-x86_64.zip"
+    - name: Grab PSCX msi
+      win_get_url:
+        url: "http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=pscx&DownloadId=923562&FileTime=130585918034470000&Build=20959"
+        dest: "C:\\pscx.msi"
+    - name: Install PSCX msi
+      win_msi:
+        path: "C:\\pscx.msi"
+    - name: unzip eclipse
+      win_unzip:  
+        src: "C:\\Users\\Amina\\eclipse-jee-luna-SR2-win32-x86_64.zip"
+        dest: "C:\\Users\\Amina\\tools"
