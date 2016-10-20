@@ -1,37 +1,39 @@
 ---
-- hosts: all
+- hosts: windows
   vars:
       JAVA_HOME: "C:\\Program Files\\Java\\jdk1.7.0_76"
   tasks:
-    - name: install and set java
-      win_chocolatey:
-        name: jdk7 -y
-        state: present
-    - name: set environment
-      win_environment:
-        state: present
-        name: JAVA_HOME
-        value: "{{ JAVA_HOME }}"
-        level: user 
-    - name: Install Apache Tomcat
-      win_chocolatey:
-        name: tomcat
-        version: 8.0.33
-        state: present
-    - name: Install Eclipse Luna Java EE IDE
-      win_get_url: 
-        url: http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR2/eclipse-jee-luna-SR2-win32-x86_64.zip&r=1
-        dest: "D:\\eclipse-jee-luna-SR2-win32-x86_64.zip"
-        force: no
-    - name: unzip eclipse
-      win_unzip:  
-        src: "D:\\eclipse-jee-luna-SR2-win32-x86_64.zip"
-        dest: "D:\\tools\\eclipse"
-        creates: "D:\\tools\\eclipse"
-    - name: Create Eclipse desktop shortcut
-      script: scripts/CreateEclipseDesktopShortcut.ps1
-    - name: Notepad Plus
-      win_chocolatey:
-       name: notepadplusplus.install
-       version: 6.9.2
-       state: present
+     - name: Get system details
+       setup:
+    #- name: install and set java
+    #  win_chocolatey:
+    #    name: jdk7 -y
+    #    state: present
+    #- name: set environment
+    #  win_environment:
+    #    state: present
+    #    name: JAVA_HOME
+    #    value: "{{ JAVA_HOME }}"
+    #    level: user 
+    #- name: Install Apache Tomcat
+     # win_chocolatey:
+     #   name: tomcat
+     #   version: 8.0.33
+     #   state: present
+    #- name: Install Eclipse Luna Java EE IDE
+    #  win_get_url: 
+    #    url: http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR2/eclipse-jee-luna-SR2-win32-x86_64.zip&r=1
+    #    dest: "D:\\eclipse-jee-luna-SR2-win32-x86_64.zip"
+    #    force: no
+    #- name: unzip eclipse
+    #  win_unzip:  
+    #    src: "D:\\eclipse-jee-luna-SR2-win32-x86_64.zip"
+    #    dest: "D:\\tools\\eclipse"
+    #    creates: "D:\\tools\\eclipse"
+    #- name: Create Eclipse desktop shortcut
+    #  script: scripts/CreateEclipseDesktopShortcut.ps1
+    #- name: Notepad Plus
+    #  win_chocolatey:
+    #   name: notepadplusplus.install
+    #   version: 6.9.2
+     #  state: present
