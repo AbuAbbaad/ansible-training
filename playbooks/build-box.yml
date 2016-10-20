@@ -5,9 +5,7 @@
   tasks:
     - name: install and set java
       win_chocolatey:
-        name: jdk7
-        version: 1.7.0_76
-        environment: java
+        name: jdk7 -y
         state: present
     - name: set environment
       win_environment:
@@ -23,13 +21,13 @@
     - name: Install Eclipse Luna Java EE IDE
       win_get_url: 
         url: http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR2/eclipse-jee-luna-SR2-win32-x86_64.zip&r=1
-        dest: "C:\\Users\\Amina\\eclipse-jee-luna-SR2-win32-x86_64.zip"
+        dest: "D:\\eclipse-jee-luna-SR2-win32-x86_64.zip"
         force: no
     - name: unzip eclipse
       win_unzip:  
-        src: "C:\\Users\\Amina\\eclipse-jee-luna-SR2-win32-x86_64.zip"
-        dest: "C:\\Users\\Amina\\tools"
-        creates: "C:\\Users\\Amina\\tools\\eclipse"
+        src: "D:\\eclipse-jee-luna-SR2-win32-x86_64.zip"
+        dest: "D:\\tools\\eclipse"
+        creates: "D:\\tools\\eclipse"
     - name: Create Eclipse desktop shortcut
       script: scripts/CreateEclipseDesktopShortcut.ps1
     - name: Notepad Plus
